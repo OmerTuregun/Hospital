@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <title>Hospital Simulation Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2; /* Açık gri arka plan */
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: rgb(78, 72, 98);
+            overflow: hidden;
+        }
+        .navbar a {
+            display: inline-block;
+            color: rgb(48, 186, 108);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar .menü:hover {
+            background-color: darkcyan;
+            color: black;
+        }
+        .navbar .hospital-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .navbar .profile-icon {
+            float: right;
+        }
+        .navbar .profile-icon i {
+            font-size: 20px; /* İkonun boyutunu ayarlayın */
+            color: rgb(48, 186, 108); /* İkonun rengini ayarlayın */
+        }
+        .navbar .profile-icon:hover i {
+            color: black; /* Hover efekti */
+        }
+
+        .content {
+            padding: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #f0f0f0; /* Gölgeli gri arka plan */
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px; /* Yuvarlatılmış köşeler */
+        }
+        .box h2 {
+            text-align: center;
+            color: #333; /* Koyu gri başlık */
+        }
+        .box button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .box button:first-of-type , .giris_buton{
+            background-color: #4CAF50; /* Yeşil buton */
+            color: #fff;
+        }
+        .box button:first-of-type:hover , .giris_buton:hover{
+            background-color: #45a049; /* Koyu yeşil hover */
+        }
+    </style>
+</head>
+<body>
+    {% if success_message %}
+    <div class="success-message">
+        <p>{{ success_message }}</p>
+    </div>
+    {% endif %}
+
+    <div class="navbar">
+        <a href="#" class="hospital-name">Kızılkayalar Hastanesi</a>
+        <a href="{% url 'home' %}" class="menü">Ana Sayfa</a>
+        <a href="#" class="menü">Hakkında</a>
+        <a href="#" class="menü profile-icon">
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+    
+    <div class="content">
+        <h1 style="color: #333;">Welcome to the Hospital Simulation</h1>
+        <div class="container">
+            <div class="box">
+                <h2 style="color: darkcyan;">Doktor</h2>
+                <button onclick="openModal('doctor-modal')" >Kayıt Ol</button>
+                <button class="giris_buton">Giriş Yap</button>
+            </div>
+            <div class="box">
+                <h2 style="color: darkcyan;">Hasta</h2>
+                <button onclick="openModal('patient-modal')" >Kayıt Ol</button>
+                <button class="giris_buton">Giriş Yap</button>
+            </div>
+            <div class="box">
+                <h2 style="color: darkcyan;">Yönetici</h2>
+                <button onclick="openModal('manager-modal')" >Kayıt Ol</button>
+                <button class="giris_buton">Giriş Yap</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
