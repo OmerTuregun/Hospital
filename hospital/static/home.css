@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Açık gri arka plan */
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    background-color: rgb(78, 72, 98);
+    overflow: hidden;
+}
+.navbar a {
+    display: inline-block;
+    color: rgb(48, 186, 108);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+.navbar .menü:hover {
+    background-color: darkcyan;
+    color: black;
+}
+.navbar .hospital-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+.navbar .profile-icon {
+    float: right;
+}
+.navbar .profile-icon i {
+    font-size: 20px; /* İkonun boyutunu ayarlayın */
+    color: rgb(48, 186, 108); /* İkonun rengini ayarlayın */
+}
+.navbar .profile-icon:hover i {
+    color: black; /* Hover efekti */
+}
+
+.content {
+    padding: 50px;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.box {
+    background-color: #f0f0f0; /* Gölgeli gri arka plan */
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Yuvarlatılmış köşeler */
+}
+.box h2 {
+    text-align: center;
+    color: #333; /* Koyu gri başlık */
+}
+.box button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.box button:first-of-type , .giris_buton{
+    background-color: #4CAF50; /* Yeşil buton */
+    color: #fff;
+}
+.box button:first-of-type:hover , .giris_buton:hover{
+    background-color: #45a049; /* Koyu yeşil hover */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Success message styling */
+.success-message {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.temporary-message-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.temporary-message-modal h4 {
+    margin: 0;
+    text-align: center;
+    color: #28a745;
+}
+.temporary-message-modal.error h4 {
+    color: #dc3545;
+}
