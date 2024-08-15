@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'doctor.css' %}">
+    <title>Hospital Simulation Home</title>
+</head>
+<body>
+
+        <!-- Navbar Güncellemesi -->
+    <div class="navbar">
+        <div class="left-menu">
+            <a href="#" class="menü time-icon" data-toggle="modal" data-target="#timeModal" title="Randevular">
+                <i class="fas fa-hourglass-half"></i>
+            </a>
+            <a href="#" class="hospital-name">Merhaba, {{ user_name }} {{ user_surname }}!</a>
+            <a href="{% url 'home' %}" class="menü">Ana Sayfa</a>
+            <a href="#" class="menü">Hakkında</a>
+        </div>
+        <div class="right-menu">
+            <a href="#" class="menü notification-icon" data-toggle="modal" data-target="#notificationModal" title="Bildirimler">
+                <i class="fas fa-bell"></i>
+                {% if pending_appointments %}
+                    <span class="badge badge-danger">{{ pending_appointments.count }}</span>
+                {% endif %}
+            </a>
+            <a href="#" class="menü edit-icon" data-toggle="modal" data-target="#editModal" title="Bilgi Güncelle">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <a href="#" class="menü profile-icon" data-toggle="modal" data-target="#profileModal" title="Profil">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+
+    <!-- Profil Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Profil Bilgileri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Ad:</strong> {{ user_name }}</p>
+                    <p><strong>Soyad:</strong> {{ user_surname }}</p>
+                    <p><strong>Email:</strong> {{ user_email }}</p>
+                    <p><strong>Hospital:</strong> {{ user_hospital }}</p>
+                    <p><strong>Specialization:</strong> {{ user_specialization }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Randevu Talepleri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if pending_appointments %}
+                        <ul class="list-group">
+                            {% for appointment in pending_appointments %}
+                                <li class="list-group-item">
+                                    <p><strong>Hasta:</strong> {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</p>
+                                    <p><strong>Tarih:</strong> {{ appointment.date }}</p>
+                                    <p><strong>Saat:</strong> {{ appointment.time }}</p>
+                                    <button class="btn btn-success" onclick="location.href='{% url 'approve_appointment' appointment.id %}'">Onayla</button>
+                                    <button class="btn btn-danger" onclick="location.href='{% url 'reject_appointment' appointment.id %}'">Reddet</button>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Henüz randevu talebi yok.</p>
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Randevular -->
+    <div class="appointments-container container mt-4">
+        <h2>Randevular</h2>
+        <ul class="list-group" id="appointments-list">
+            {% for appointment in approved_appointments %}
+                <li class="list-group-item appointment-item" data-date="{{ appointment.date }}">
+                    <p><strong>Hasta:</strong> {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</p>
+                    <button class="appointment-details-button" data-toggle="modal" data-target="#appointment-detail-modal{{ appointment.id }}">Detaylar</button>
+                    
+                    <!-- Randevu Detayları Modalı -->
+                    <div class="modal fade appointment-detail-modal" id="appointment-detail-modal{{ appointment.id }}" tabindex="-1" role="dialog" aria-labelledby="appointment-detail-modal-label{{ appointment.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header appointment-detail-header">
+                                    <h5 class="modal-title" id="appointment-detail-modal-label{{ appointment.id }}">Randevu Detayları</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body appointment-detail-body">
+                                    <p><strong>Tarih:</strong> {{ appointment.date }}</p>
+                                    <p><strong>Saat:</strong> {{ appointment.time }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Henüz randevu yok.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

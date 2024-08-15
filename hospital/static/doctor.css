@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Açık gri arka plan */
+    margin: 0;
+    padding: 0;
+}
+/* Navbar Stilleri */
+.navbar {
+    background-color: rgb(78, 72, 98);
+    overflow: hidden;
+    display: flex; /* Flexbox kullanımı */
+    justify-content: space-between; /* İki kısımdan biri sola, diğeri sağa hizalanır */
+    align-items: center; /* Dikey hizalama */
+    padding: 0 20px; /* Kenarlardan boşluk */
+}
+
+.navbar .left-menu, .navbar .right-menu {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .left-menu {
+    gap: 20px; /* Menü öğeleri arasındaki boşluk */
+}
+
+.navbar .right-menu {
+    gap: 10px; /* Menü öğeleri arasındaki boşluk */
+}
+
+.navbar a {
+    color: rgb(48, 186, 108);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar .menü:hover {
+    background-color: darkcyan;
+    color: black;
+}
+
+.navbar .hospital-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar .profile-icon {
+    font-size: 20px; /* İkonun boyutunu ayarlayın */
+    color: rgb(48, 186, 108); /* İkonun rengini ayarlayın */
+}
+
+.navbar .profile-icon:hover i {
+    color: black; /* Hover efekti */
+}
+
+/* Kum saati ikonu için stil */
+.navbar .time-icon {
+    font-size: 20px; /* İkonun boyutunu ayarlayın */
+    color: rgb(48, 186, 108); /* İkonun rengini ayarlayın */
+}
+
+.navbar .time-icon:hover i {
+    color: black; /* Hover efekti */
+}
+
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Profil İcon Modalı */
+.modal-header {
+    background-color: darkcyan;
+    color: wheat;
+}
+
+.modal-body {
+    font-size: 1.1rem;
+}
+
+/* Randevu Listesi Stili */
+.appointments-container {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.appointment-item {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: darkcyan;
+    margin-bottom: 10px;
+    position: relative;
+    width: 500px;
+    overflow: hidden; /* İçeriğin taşmasını önlemek için */
+    white-space: nowrap; /* Metnin tek satırda kalmasını sağlamak için */
+    text-overflow: ellipsis; /* Taşan metni üç nokta ile belirtmek için */
+}
+
+.appointment-item p {
+    margin: 0;
+}
+
+.appointment-details-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.appointment-details-button:hover {
+    background-color: rgb(48, 186, 108);
+}
+
+/* Randevu Detay Modal Stili */
+.appointment-detail-header {
+    background-color: darkcyan;
+    color: wheat;
+}
+
+.appointment-detail-body {
+    font-size: 1.1rem;
+}
+
+.appointment-detail-modal .modal-dialog {
+    max-width: 350px;
+}
+
+.appointment-detail-modal .modal-content {
+    border-radius: 8px;
+}
+
+.appointment-detail-modal .modal-footer {
+    border-top: 1px solid #0056b3;
+}
+
+
+

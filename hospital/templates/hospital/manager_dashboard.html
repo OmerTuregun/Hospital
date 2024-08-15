@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'manager.css' %}">
+    <title>Hospital Simulation Home</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" class="hospital-name">Merhaba, {{ user_name }} {{ user_surname }}!</a>
+        <a href="{% url 'home' %}" class="menü">Ana Sayfa</a>
+        <a href="#" class="menü">Hakkında</a>
+        <a href="#" class="menü profile-icon" data-toggle="modal" data-target="#profileModal">
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+
+    <!-- Profil Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Profil Bilgileri</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Ad:</strong> {{ user_name }}</p>
+                    <p><strong>Soyad:</strong> {{ user_surname }}</p>
+                    <p><strong>Email:</strong> {{ user_email }}</p>
+                    <!-- Diğer bilgileri buraya ekleyebilirsiniz -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

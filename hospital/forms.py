@@ -1,5 +1,5 @@
 from django import forms
-from .models import Doctor, Patient, Manager
+from .models import Doctor, Patient, Manager, Appointment
 import datetime
 
 class DoctorForm(forms.ModelForm):
@@ -60,3 +60,29 @@ class ManagerForm(forms.ModelForm):
         if len(password) < 6:
             raise forms.ValidationError("Şifre en az 6 karakter uzunluğunda olmalıdır.")
         return password
+    
+class AppointmentForm(forms.ModelForm):
+    date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        help_text="Randevu tarihi seçin."
+    )
+    time = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'}),
+        help_text="Randevu saati seçin."
+    )
+
+    class Meta:
+        model = Appointment
+        fields = ['doctor', 'date', 'time']
+
+    def __init__(self, *args, **kwargs):
+        self.patient = kwargs.pop('patient', None)
+        super(AppointmentForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        appointment = super(AppointmentForm, self).save(commit=False)
+        if self.patient:
+            appointment.patient = self.patient
+        if commit:
+            appointment.save()
+        return appointment
